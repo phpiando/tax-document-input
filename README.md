@@ -1,37 +1,37 @@
 # Tax Document Input Plugin
 
-Um plugin JavaScript vanilla para formatação automática de documentos fiscais de diferentes países, similar ao intl-tel-input mas para documentos como CPF, CNPJ, NIF, NIPC, SSN, EIN, etc.
+A vanilla JavaScript plugin for automatic formatting of tax documents from different countries, similar to intl-tel-input but for documents like CPF, CNPJ, NIF, NIPC, SSN, EIN, etc.
 
-## 🚀 Características
+## 🚀 Features
 
-- **JavaScript Vanilla**: Sem dependências externas
-- **Formatação Automática**: Aplica máscaras conforme a digitação
-- **Detecção Inteligente**: Identifica automaticamente o tipo de documento baseado no comprimento
-- **Validação Completa**: Algoritmos de validação reais (dígitos verificadores, etc.)
-- **Multi-país**: Suporte inicial para Brasil, Portugal e Estados Unidos
-- **Seletor de País**: Interface similar ao intl-tel-input com bandeiras
-- **Bandeira Visível**: Exibe a bandeira do país selecionado ao lado do input
-- **GeoIP Lookup**: Detecção automática do país via IP (opcional)
-- **API Completa**: Métodos públicos para controle programático
-- **Eventos Customizados**: Event listeners para mudanças de país
-- **Configurável**: Opções para customizar comportamento e aparência
-- **Sistema de Validação Modular**: Regras organizadas por país em arquivos separados
+- **Vanilla JavaScript**: No external dependencies
+- **Automatic Formatting**: Applies masks as you type
+- **Smart Detection**: Automatically identifies document type based on length
+- **Complete Validation**: Real validation algorithms (check digits, etc.)
+- **Multi-country**: Initial support for Brazil, Portugal and United States
+- **Country Selector**: Interface similar to intl-tel-input with flags
+- **Visible Flag**: Displays the selected country flag next to the input
+- **GeoIP Lookup**: Automatic country detection via IP (optional)
+- **Complete API**: Public methods for programmatic control
+- **Custom Events**: Event listeners for country changes
+- **Configurable**: Options to customize behavior and appearance
+- **Modular Validation System**: Rules organized by country in separate files
 
-## 📋 Documentos Suportados
+## 📋 Supported Documents
 
-### Brasil 🇧🇷
-- **CPF** (11 dígitos): `123.456.789-01`
-- **CNPJ** (14 dígitos): `12.345.678/0001-90`
+### Brazil 🇧🇷
+- **CPF** (11 digits): `123.456.789-01`
+- **CNPJ** (14 digits): `12.345.678/0001-90`
 
 ### Portugal 🇵🇹
-- **NIF** (9 dígitos): `123 456 789`
-- **NIPC** (9 dígitos): `123 456 789`
+- **NIF** (9 digits): `123 456 789`
+- **NIPC** (9 digits): `123 456 789`
 
-### Estados Unidos 🇺🇸
-- **SSN** (9 dígitos): `123-45-6789`
-- **EIN** (9 dígitos): `12-3456789`
+### United States 🇺🇸
+- **SSN** (9 digits): `123-45-6789`
+- **EIN** (9 digits): `12-3456789`
 
-## 🛠️ Instalação
+## 🛠️ Installation
 
 ### Via CDN
 ```html
@@ -43,13 +43,13 @@ Um plugin JavaScript vanilla para formatação automática de documentos fiscais
 npm install tax-document-input
 ```
 
-### Download Direto
-Baixe o arquivo `tax-document-input.js` e inclua em seu projeto:
+### Direct Download
+Download the `tax-document-input.js` file and include in your project:
 ```html
 <script src="path/to/tax-document-input.js"></script>
 ```
 
-## 📖 Uso Básico
+## 📖 Basic Usage
 
 ### HTML
 ```html
@@ -58,38 +58,38 @@ Baixe o arquivo `tax-document-input.js` e inclua em seu projeto:
 
 ### JavaScript
 ```javascript
-// Inicialização básica
+// Basic initialization
 const taxInput = new TaxDocumentInput(document.getElementById('tax-document'));
 
-// Com opções
+// With options
 const taxInput = new TaxDocumentInput(document.getElementById('tax-document'), {
-    placeholder: 'Digite seu documento',
+    placeholder: 'Enter your document',
     defaultCountry: 'br',
     autoGeolocate: false,
     onlyCountries: ['br', 'pt']
 });
 ```
 
-## ⚙️ Opções de Configuração
+## ⚙️ Configuration Options
 
-| Opção | Tipo | Padrão | Descrição |
-|-------|------|--------|-----------|
-| `placeholder` | string | `'Document Tax'` | Texto do placeholder do input |
-| `defaultCountry` | string | `'br'` | País padrão (ISO2 code) |
-| `autoGeolocate` | boolean | `false` | Ativar detecção automática de país via IP |
-| `onlyCountries` | array | `[]` | Limitar países disponíveis (ex: `['br', 'pt']`) |
-| `geoIpLookup` | function | `null` | Função customizada para lookup de país via IP |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `placeholder` | string | `'Document Tax'` | Input placeholder text |
+| `defaultCountry` | string | `'br'` | Default country (ISO2 code) |
+| `autoGeolocate` | boolean | `false` | Enable automatic country detection via IP |
+| `onlyCountries` | array | `[]` | Limit available countries (e.g. `['br', 'pt']`) |
+| `geoIpLookup` | function | `null` | Custom function for IP country lookup |
 
-### Exemplo com todas as opções:
+### Example with all options:
 ```javascript
 const taxInput = new TaxDocumentInput(document.getElementById('tax-document'), {
-    placeholder: 'Número do Contribuinte',
+    placeholder: 'Taxpayer Number',
     defaultCountry: 'pt',
     autoGeolocate: true,
     onlyCountries: ['br', 'pt', 'us'],
     geoIpLookup: function(callback) {
-        // Implementação customizada
-        fetch('https://sua-api-geoip.com/lookup')
+        // Custom implementation
+        fetch('https://your-geoip-api.com/lookup')
             .then(res => res.json())
             .then(data => callback(data.country))
             .catch(() => callback('br')); // fallback
@@ -99,17 +99,17 @@ const taxInput = new TaxDocumentInput(document.getElementById('tax-document'), {
 
 ## 🌍 GeoIP Lookup
 
-### Lookup Automático
+### Automatic Lookup
 ```javascript
-// Usa a API ipapi.co por padrão
+// Uses ipapi.co API by default
 const taxInput = new TaxDocumentInput(document.getElementById('input'), {
     autoGeolocate: true
 });
 ```
 
-### Lookup Customizado
+### Custom Lookup
 ```javascript
-// Similar ao intl-tel-input
+// Similar to intl-tel-input
 const taxInput = new TaxDocumentInput(document.getElementById('input'), {
     autoGeolocate: true,
     geoIpLookup: callback => {
@@ -121,55 +121,55 @@ const taxInput = new TaxDocumentInput(document.getElementById('input'), {
 });
 ```
 
-## 🎯 API Pública
+## 🎯 Public API
 
-### Métodos
+### Methods
 
 #### `getSelectedCountry()`
-Retorna o código ISO2 do país selecionado.
+Returns the selected country ISO2 code.
 ```javascript
 const country = taxInput.getSelectedCountry(); // 'br'
 ```
 
 #### `getSelectedCountryData()`
-Retorna dados completos do país selecionado.
+Returns complete data of the selected country.
 ```javascript
 const countryData = taxInput.getSelectedCountryData();
 // { name: 'Brasil', iso2: 'br', flag: '🇧🇷', documents: {...} }
 ```
 
 #### `getCurrentDocumentType()`
-Retorna o tipo de documento atual baseado no comprimento digitado.
+Returns the current document type based on typed length.
 ```javascript
-const docType = taxInput.getCurrentDocumentType(); // 'cpf' ou 'cnpj'
+const docType = taxInput.getCurrentDocumentType(); // 'cpf' or 'cnpj'
 ```
 
 #### `setCountry(countryCode)`
-Define o país programaticamente.
+Sets the country programmatically.
 ```javascript
-taxInput.setCountry('pt'); // Define Portugal
+taxInput.setCountry('pt'); // Set Portugal
 ```
 
 #### `getValue()`
-Retorna o valor formatado do input.
+Returns the formatted input value.
 ```javascript
 const value = taxInput.getValue(); // '123.456.789-01'
 ```
 
 #### `getCleanValue()`
-Retorna apenas os números, sem formatação.
+Returns only numbers, without formatting.
 ```javascript
 const cleanValue = taxInput.getCleanValue(); // '12345678901'
 ```
 
 #### `isValid()`
-Verifica se o documento está completo e válido.
+Checks if the document is complete and valid.
 ```javascript
 const isValid = taxInput.isValid(); // true/false
 ```
 
 #### `validateDocument()`
-Retorna validação completa do documento com detalhes.
+Returns complete document validation with details.
 ```javascript
 const validation = taxInput.validateDocument();
 // {
@@ -183,7 +183,7 @@ const validation = taxInput.validateDocument();
 ```
 
 #### `getCurrentDocumentInfo()`
-Retorna informações completas sobre o tipo de documento atual.
+Returns complete information about the current document type.
 ```javascript
 const info = taxInput.getCurrentDocumentInfo();
 // {
@@ -195,95 +195,86 @@ const info = taxInput.getCurrentDocumentInfo();
 // }
 ```
 
-## 🎪 Eventos
+## 🎪 Events
 
 ### `countrychange`
-Disparado quando o país é alterado.
+Fired when the country is changed.
 
 ```javascript
 document.getElementById('tax-document').addEventListener('countrychange', function(e) {
-    console.log('País anterior:', e.detail.previousCountry);
-    console.log('Novo país:', e.detail.newCountry);
-    console.log('Dados do país:', e.detail.countryData);
+    console.log('Previous country:', e.detail.previousCountry);
+    console.log('New country:', e.detail.newCountry);
+    console.log('Country data:', e.detail.countryData);
 });
 ```
 
-### Exemplo prático:
+### Practical example:
 ```javascript
 const input = document.getElementById('tax-document');
 const taxInput = new TaxDocumentInput(input);
 
-// Listener para mudança de país
+// Listener for country change
 input.addEventListener('countrychange', function(e) {
-    console.log(`País alterado de ${e.detail.previousCountry} para ${e.detail.newCountry}`);
+    console.log(`Country changed from ${e.detail.previousCountry} to ${e.detail.newCountry}`);
     
-    // Limpar validações anteriores, alterar labels, etc.
+    // Clear previous validations, change labels, etc.
     updateFormLabels(e.detail.newCountry);
 });
 
-// Listener para mudanças no input
+// Listener for input changes
 input.addEventListener('input', function(e) {
     const docType = taxInput.getCurrentDocumentType();
     const isValid = taxInput.isValid();
     
-    console.log(`Documento: ${docType}, Válido: ${isValid}`);
+    console.log(`Document: ${docType}, Valid: ${isValid}`);
 });
 ```
 
-## 🎨 Personalização CSS
+## 🎨 CSS Customization
 
-O plugin adiciona classes CSS que podem ser customizadas:
+The plugin adds CSS classes that can be customized:
 
 ```css
-/* Container principal */
+/* Main container */
 .tax-document-input {
     border: 2px solid #007bff;
     border-radius: 8px;
 }
 
-/* Botão do país */
+/* Country button */
 .tax-document-input__country-button {
     background-color: #f8f9fa;
 }
 
-/* Campo de input */
+/* Input field */
 .tax-document-input__field {
     font-size: 16px;
     padding: 12px;
 }
 
-/* Bandeira visível ao lado do input */
-.tax-document-input__flag-display {
-    right: 12px; /* Ajustar posição */
-}
-
-.tax-document-input__flag-display .tax-document-input__flag {
-    font-size: 20px; /* Tamanho da bandeira */
-}
-
-/* Dropdown de países */
+/* Countries dropdown */
 .tax-document-input__dropdown {
     border: 2px solid #007bff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Item do dropdown */
+/* Dropdown item */
 .tax-document-input__dropdown-item:hover {
     background-color: #007bff;
     color: white;
 }
 ```
 
-## 🔧 Uso Avançado
+## 🔧 Advanced Usage
 
-### Múltiplas instâncias
+### Multiple instances
 ```javascript
-// Inicializar múltiplos inputs de uma vez
+// Initialize multiple inputs at once
 const instances = TaxDocumentInput.init('.tax-document-input', {
     defaultCountry: 'br'
 });
 
-// Ou individualmente
+// Or individually
 const personalDoc = new TaxDocumentInput(document.getElementById('personal-doc'), {
     onlyCountries: ['br'],
     placeholder: 'CPF'
@@ -295,7 +286,7 @@ const companyDoc = new TaxDocumentInput(document.getElementById('company-doc'), 
 });
 ```
 
-### Validação em formulário
+### Form validation
 ```javascript
 const form = document.getElementById('registration-form');
 const taxInput = new TaxDocumentInput(document.getElementById('tax-document'));
@@ -303,22 +294,22 @@ const taxInput = new TaxDocumentInput(document.getElementById('tax-document'));
 form.addEventListener('submit', function(e) {
     if (!taxInput.isValid()) {
         e.preventDefault();
-        alert('Documento fiscal inválido!');
+        alert('Invalid tax document!');
         return;
     }
     
-    // Enviar dados
+    // Send data
     const formData = {
         document: taxInput.getCleanValue(),
         documentType: taxInput.getCurrentDocumentType(),
         country: taxInput.getSelectedCountry()
     };
     
-    console.log('Dados para envio:', formData);
+    console.log('Data to send:', formData);
 });
 ```
 
-### Integração com frameworks
+### Framework integration
 ```javascript
 // Vue.js
 new Vue({
@@ -339,7 +330,7 @@ new Vue({
     }
 });
 
-// React (em useEffect)
+// React (in useEffect)
 useEffect(() => {
     const taxInput = new TaxDocumentInput(inputRef.current);
     
@@ -349,52 +340,56 @@ useEffect(() => {
 }, []);
 ```
 
-## 🌍 Expandindo para Outros Países
+## 🌍 Expanding to Other Countries
 
-Em breve, o plugin suportará mais países. Para contribuir crie um pull request.
+Soon, the plugin will support more countries. To contribute, create a pull request.
 
-## 🐛 Resolução de Problemas
+## 🐛 Troubleshooting
 
-### Input não está sendo formatado
-- Verifique se o plugin foi inicializado corretamente
-- Certifique-se de que o elemento existe no DOM
-- Verifique o console para erros JavaScript
+### Input is not being formatted
+- Check if the plugin was initialized correctly
+- Make sure the element exists in the DOM
+- Check the console for JavaScript errors
 
-### Dropdown não aparece
-- Verifique se não há conflitos de CSS com z-index
-- Certifique-se de que o container pai não tem `overflow: hidden`
+### Dropdown doesn't appear
+- Check for CSS conflicts with z-index
+- Make sure the parent container doesn't have `overflow: hidden`
 
-### GeoIP Lookup não funciona
-- HTTPS é recomendado para APIs externas
-- Verifique se a API ipapi.co está acessível
-- Configure um fallback no seu `geoIpLookup` customizado
-- Configure `autoGeolocate: false` se não for necessário
+### GeoIP Lookup doesn't work
+- HTTPS is recommended for external APIs
+- Check if the ipapi.co API is accessible
+- Configure a fallback in your custom `geoIpLookup`
+- Set `autoGeolocate: false` if not needed
 
-## 📄 Licença
+## 📄 License
 
-MIT License - veja o arquivo LICENSE para detalhes.
+MIT License - see the LICENSE file for details.
 
-## 🤝 Contribuindo
+## 🤝 Contributing
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Open a Pull Request
 
-## 📞 Suporte
+## 📞 Support
 
-- 📧 Email: seu-email@exemplo.com
+- 📧 Email: your-email@example.com
 - 🐛 Issues: [GitHub Issues](https://github.com/phpiando/tax-document-input/issues)
-- 📖 Documentação: [GitHub Wiki](https://github.com/phpiando/tax-document-input/wiki)
+- 📖 Documentation: [GitHub Wiki](https://github.com/phpiando/tax-document-input/wiki)
+
+## ☕ Sponsors
+If you find this plugin useful, consider sponsoring its development:
+- [Sponsor on GitHub](https://github.com/sponsors/phpiando)
 
 ## 📝 Changelog
 
 ### v1.0.0
-- Lançamento inicial
-- Suporte para Brasil, Portugal e Estados Unidos
-- Formatação automática de CPF, CNPJ, NIF, NIPC, SSN, EIN
-- Interface com seletor de país
-- API completa com métodos públicos
-- Eventos customizados
-- Geolocalização opcional
+- Initial release
+- Support for Brazil, Portugal and United States
+- Automatic formatting for CPF, CNPJ, NIF, NIPC, SSN, EIN
+- Interface with country selector
+- Complete API with public methods
+- Custom events
+- Optional geolocation
