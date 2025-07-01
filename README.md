@@ -375,7 +375,6 @@ MIT License - see the LICENSE file for details.
 
 ## 📞 Support
 
-- 📧 Email: your-email@example.com
 - 🐛 Issues: [GitHub Issues](https://github.com/phpiando/tax-document-input/issues)
 - 📖 Documentation: [GitHub Wiki](https://github.com/phpiando/tax-document-input/wiki)
 
