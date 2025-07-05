@@ -1,6 +1,6 @@
 {
   "name": "tax-document-input",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A vanilla JavaScript plugin for automatic formatting of tax documents from different countries (CPF, CNPJ, NIF, NIPC, SSN, EIN)",
   "type": "module",
   "main": "dist/tax-document-input.js",
