@@ -12,11 +12,11 @@ import { ValidatorInstance } from '../Validator.js';
 
 const PortugalRules = {
     /**
-     * Validates NIF (Número de Identificação Fiscal) - Individual
-     * @description Validates Portuguese individual taxpayer identification number
+     * Validates NIF (Número de Identificação Fiscal)
+     * @description Validates Portuguese taxpayer identification number for all entity types
      * @param {string} nif - NIF with numbers only
      * @returns {Object} Validation result with isValid, error and details
-     * @version 1.0.0
+     * @version 1.0.1
      */
     nif: function(nif) {
         nif = nif.replace(/\D/g, '');
@@ -37,11 +37,11 @@ const PortugalRules = {
             };
         }
 
-        const validFirstDigits = ['1', '2', '3'];
+        const validFirstDigits = ['1', '2', '3', '5', '6', '7', '8', '9'];
         if (!validFirstDigits.includes(nif.charAt(0))) {
             return {
                 isValid: false,
-                error: 'Personal NIF must start with 1, 2 or 3',
+                error: 'NIF must start with 1, 2, 3, 5, 6, 7, 8 or 9',
                 details: { firstDigit: nif.charAt(0), validFirstDigits }
             };
         }
@@ -68,12 +68,14 @@ const PortugalRules = {
             };
         }
 
+        const entityType = this.getEntityType(nif.charAt(0));
+
         return {
             isValid: true,
             error: null,
             details: {
                 formatted: `${nif.slice(0,3)} ${nif.slice(3,6)} ${nif.slice(6,9)}`,
-                type: 'personal',
+                type: entityType,
                 country: 'PT'
             }
         };
@@ -145,6 +147,28 @@ const PortugalRules = {
                 country: 'PT'
             }
         };
+    },
+
+    /**
+     * Determines entity type based on first digit
+     * @description Maps first digit to entity type for Portuguese NIFs
+     * @param {string} firstDigit - First digit of the NIF
+     * @returns {string} Entity type description
+     * @version 1.0.1
+     */
+    getEntityType: function(firstDigit) {
+        const entityTypes = {
+            '1': 'personal',
+            '2': 'personal',
+            '3': 'personal',
+            '5': 'public_entity',
+            '6': 'non_profit',
+            '7': 'other_entity',
+            '8': 'other_entity',
+            '9': 'other_entity'
+        };
+
+        return entityTypes[firstDigit] || 'unknown';
     }
 };
 
